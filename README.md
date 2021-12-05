@@ -3,7 +3,7 @@
 ## What is it?
 - This simple implementation aims to control a Wi-fi Mesh router to save energy and reduce exposure to electromagnetic radiation. Furthermore, using some RTOS functionalities, the system ensures that the ESP32 remains connected and that the relay remains in the state provided for the situation. The system also allows the ESP32 to go into deep sleep mode, waking up at a pre-set time.
 
-## Tools use
+## Tools used
 - 1 ESP32
 - 1 Relay
 - Wifi
