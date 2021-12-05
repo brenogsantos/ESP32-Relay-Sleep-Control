@@ -10,7 +10,7 @@ void setup() {
 
   digitalWrite(RELAY_OUTPUT_PIN, HIGH);
   Serial.begin(9600);
-	WIFI::ConnectToWiFi();
+  WIFI::ConnectToWiFi();
   RTOS::RTOS_init();
   SERVER::server_init();
   NTP::ntp_init();
