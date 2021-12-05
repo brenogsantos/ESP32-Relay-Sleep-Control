@@ -90,7 +90,6 @@ void RTOS::keepWiFiAlive(void * parameters){
 void RTOS::keepSleep(void * parameters){
   for(;;){
     if(NTP::comp_hour() == 1){
-        Serial.println("deu 6, parar o sleep_oFF");
         flag_sleep = 0;
         Serial.printf("flag_sleep: %d\n", flag_sleep);
         SERVER::handle_rele_on();
@@ -99,14 +98,12 @@ void RTOS::keepSleep(void * parameters){
     }
     else if(NTP::comp_hour() == 2){         //pediu pra dormir
         flag_sleep = 1;
-        Serial.println("depois de 21, pediu pra dormir até 6");
         Serial.printf("flag_sleep: %d\n", flag_sleep);
         SERVER::handle_sleep_off(); 
         vTaskDelay(3000 / portTICK_PERIOD_MS);
         continue;
     }
     else if(NTP::comp_hour() == 3){     
-        Serial.println("normal");
         Serial.printf("flag_sleep: %d\n", flag_sleep);
         if(!flag_rele_state)SERVER::handle_rele_off(); 
         else SERVER::handle_rele_on(); 
@@ -139,7 +136,7 @@ void SERVER::handle_rele_on() {
     flag_rele_state = 1;
     flag_sleep = 0;
     gpio_hold_dis(GPIO_NUM_15);
-    digitalWrite(15, HIGH);
+    digitalWrite(RELAY_OUTPUT_PIN, HIGH);
     digitalWrite(LED_BUILTIN,HIGH);
     gpio_hold_en(GPIO_NUM_15);
     gpio_deep_sleep_hold_en();
@@ -154,7 +151,7 @@ void SERVER::handle_sleep_off() {
 
     flag_rele_state = 0;
     flag_sleep = 1;
-    digitalWrite(15, LOW);
+    digitalWrite(RELAY_OUTPUT_PIN, LOW);
     digitalWrite(LED_BUILTIN,LOW);
   //  esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);
 
@@ -169,7 +166,7 @@ void SERVER::handle_sleep_off() {
 void SERVER::handle_sleep_on(void){
 
     gpio_hold_dis(GPIO_NUM_15);
-    digitalWrite(15, HIGH);
+    digitalWrite(RELAY_OUTPUT_PIN, HIGH);
     digitalWrite(LED_BUILTIN,HIGH);
     gpio_hold_en(GPIO_NUM_15);
     gpio_deep_sleep_hold_en();
@@ -243,7 +240,7 @@ uint8_t NTP::comp_hour(void){
     uint16_t hora = 0;
     if(!getLocalTime(&timeinfo)){
         Serial.println("Failed to obtain time");
-        return 0;
+        return 3;
     }
     strftime(timeHour,3, "%H", &timeinfo);
     Serial.println(timeHour);

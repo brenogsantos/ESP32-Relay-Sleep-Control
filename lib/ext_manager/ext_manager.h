@@ -19,16 +19,17 @@
 #include "WebServer.h"
 #include "time.h"
 
-#define uS_TO_S_FACTOR 1000000  //Conversion factor for micro seconds to seconds
-#define TIME_TO_SLEEP  5        //Time ESP32 will go to sleep (in seconds)
+//#define uS_TO_S_FACTOR 1000000
+//#define TIME_TO_SLEEP  5      
 #define HORA_WAKEUP_FROM_OFF    7
+#define RELAY_OUTPUT_PIN 15
 extern uint8_t flag_sleep;
 
 // WIFI FUnctions =========================================================================
 namespace WIFI {
 	
-	const char * const SSID = "MATRIX";
-	const char * const PASSWORD = "100lula12"; 
+	const char * const SSID = "***";
+	const char * const PASSWORD = "***"; 
 
 	void ConnectToWiFi(void);
 }
