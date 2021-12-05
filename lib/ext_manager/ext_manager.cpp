@@ -172,8 +172,8 @@ void SERVER::handle_sleep_on(void){
     gpio_deep_sleep_hold_en();
     //esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);
     esp_sleep_enable_timer_wakeup(1800000000);
-    Serial.println("Setup ESP32 to sleep for every " + String(TIME_TO_SLEEP) +
-	" Seconds");
+  //  Serial.println("Setup ESP32 to sleep for every " + String(TIME_TO_SLEEP) +
+//	" Seconds");
     esp_deep_sleep_start();
 
 }
@@ -183,7 +183,7 @@ String SERVER::SendHTML(uint8_t rele_status){
 
     String ptr = "<!DOCTYPE html> <html>\n";
     ptr +="<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\">\n";
-    ptr +="<title>LED Control</title>\n";
+    ptr +="<title>Relay Control</title>\n";
     ptr +="<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}\n";
     ptr +="body{margin-top: 50px;} h1 {color: #444444;margin: 50px auto 30px;} h3 {color: #444444;margin-bottom: 50px;}\n";
     ptr +=".button {display: block;width: 80px;background-color: #3498db;border: none;color: white;padding: 13px 30px;text-decoration: none;font-size: 25px;margin: 0px auto 35px;cursor: pointer;border-radius: 4px;}\n";
